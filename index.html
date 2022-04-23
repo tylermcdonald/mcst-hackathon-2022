@@ -11,8 +11,15 @@
 </head>
 
 <body>
-    <div style="display: flex; flex-direction: column; padding: 0 16px">
-        <div id="signout-container">
+    <div style="display: flex; flex-direction: column; padding: 0 16px;">
+        <div id="signed-in-container" style="display: none;">
+            <h1>HackMCST Demo -- Signed In</h1>
+            <div>
+                <h4 id="greeting-message-content"></h4>
+            </div>
+            <button id="sign-out-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out</button>
+        </div>
+        <div id="signed-out-container" style="display: none;">
             <h1>HackMCST Demo -- Signed Out</h1>
             <div style="border-style: solid; border-color: black; margin-bottom: 16px; padding: 0 16px;">
                 <form action="#">

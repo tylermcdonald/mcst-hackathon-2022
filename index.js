@@ -1,6 +1,6 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -37,8 +37,7 @@ function createUserAccount(e) {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            console.log(user);
-            // ...
+            // Do something here if you want
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -59,7 +58,7 @@ function loginUser(e) {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            // ...
+            // Do something here if you want
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -68,5 +67,26 @@ function loginUser(e) {
         });
 }
 
+function signOutUser() {
+    signOut(auth);
+}
+
+onAuthStateChanged(auth, (user) => {
+    const signedInContainer = document.getElementById('signed-in-container');
+    const signedOutContainer =  document.getElementById('signed-out-container');
+    if(user) {
+        signedInContainer.style.display = 'block';
+        signedOutContainer.style.display = 'none';
+        // For now, just instantly sign them out until next step
+        const greetingMessage = document.getElementById('greeting-message-content');
+        greetingMessage.textContent = `Good afternoon, ${user.email}`;
+        return;
+    }
+    
+    signedInContainer.style.display = 'none';
+    signedOutContainer.style.display = 'block';
+});
+
 document.getElementById('create-account-button').onclick = createUserAccount;
 document.getElementById('login-button').onclick = loginUser;
+document.getElementById('sign-out-button').onclick = signOutUser;
