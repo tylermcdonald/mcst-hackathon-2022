@@ -11,22 +11,47 @@
 </head>
 
 <body>
-    <div style="display: flex; flex-direction: column;">
-        <h1>HackMCST Demo</h1>
-        <form id="signup-form" action="#">
-            <div class="mdl-textfield mdl-js-textfield">
-                <label class="mdl-textfield__label" for="email">Email</label>
-                <input class="mdl-textfield__input" type="text" id="email" name="email" required>
+    <div style="display: flex; flex-direction: column; padding: 0 16px">
+        <div id="signout-container">
+            <h1>HackMCST Demo -- Signed Out</h1>
+            <div style="border-style: solid; border-color: black; margin-bottom: 16px; padding: 0 16px;">
+                <form action="#">
+                    <h4>Sign Up</h4>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield__label" for="email">Email</label>
+                        <input class="mdl-textfield__input" type="text" id="signup-email" name="signup-email" required>
+                    </div>
+                    <br />
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield__label" for="password">Password</label>
+                        <input class="mdl-textfield__input" type="password" id="signup-password" name="signup-password"
+                            required>
+                    </div>
+                    <br />
+                    <button id="create-account-button"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create
+                        Account</button>
+                </form>
             </div>
-            <br />
-            <div class="mdl-textfield mdl-js-textfield">
-                <label class="mdl-textfield__label" for="password">Password</label>
-                <input class="mdl-textfield__input" type="password" id="password" name="password" required>
+            <div style="border-style: solid; border-color: black; padding: 0 16px;">
+                <form action="#">
+                    <h4>Login</h4>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield__label" for="email">Email</label>
+                        <input class="mdl-textfield__input" type="text" id="login-email" name="login-email" required>
+                    </div>
+                    <br />
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <label class="mdl-textfield__label" for="password">Password</label>
+                        <input class="mdl-textfield__input" type="password" id="login-password" name="login-password"
+                            required>
+                    </div>
+                    <br />
+                    <button id="login-button"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
+                </form>
             </div>
-            <br />
-            <button id="create-account-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create
-                Account</button>
-        </form>
+        </div>
     </div>
     <script type="module" src="index.js"></script>
 </body>
