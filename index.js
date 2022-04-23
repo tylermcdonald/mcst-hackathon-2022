@@ -1,6 +1,7 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js'
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+import { getFirestore, setDoc, doc, collection, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -71,10 +72,12 @@ function signOutUser() {
     signOut(auth);
 }
 
+let currUser;
 onAuthStateChanged(auth, (user) => {
     const signedInContainer = document.getElementById('signed-in-container');
-    const signedOutContainer =  document.getElementById('signed-out-container');
-    if(user) {
+    const signedOutContainer = document.getElementById('signed-out-container');
+    currUser = user;
+    if (user) {
         signedInContainer.style.display = 'block';
         signedOutContainer.style.display = 'none';
         // For now, just instantly sign them out until next step
@@ -82,11 +85,42 @@ onAuthStateChanged(auth, (user) => {
         greetingMessage.textContent = `Good afternoon, ${user.email}`;
         return;
     }
-    
+
     signedInContainer.style.display = 'none';
     signedOutContainer.style.display = 'block';
 });
 
+
+const firestore = getFirestore(app);
+
+async function addUserData(e) {
+    e.preventDefault();
+    if (!currUser) {
+        return;
+    }
+    const key = document.getElementById('key-input').value;
+    const value = document.getElementById("value-input").value;
+    if (!key || key.trim().length === 0) {
+        return;
+    }
+    const userRef = doc(firestore, "users", currUser.uid);
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+        await updateDoc(userRef, {
+            [key]: value
+        });
+    } else {
+        await setDoc(userRef, {
+            id: currUser.uid,
+            email: currUser.email,
+            [key]: value
+        });
+    }
+
+}
+// addUserData();
+
 document.getElementById('create-account-button').onclick = createUserAccount;
 document.getElementById('login-button').onclick = loginUser;
 document.getElementById('sign-out-button').onclick = signOutUser;
+document.getElementById("add-data-button").onclick = addUserData;

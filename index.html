@@ -17,6 +17,21 @@
             <div>
                 <h4 id="greeting-message-content"></h4>
             </div>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label class="mdl-textfield__label" for="key-input">Key</label>
+                    <input class="mdl-textfield__input" type="text" id="key-input" name="key-input" required>
+                </div>
+                <br />
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label class="mdl-textfield__label" for="value-input">Value</label>
+                    <input class="mdl-textfield__input" type="text" id="value-input" name="value-input"
+                        required>
+                </div>
+                <br />
+                <button id="add-data-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add Data</button>
+            </form>
+
             <button id="sign-out-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign Out</button>
         </div>
         <div id="signed-out-container" style="display: none;">
